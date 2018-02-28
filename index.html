@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+
+<html lang="en-us">
+<meta charset="utf-8">
+
+<head>
+    <title>Trivia Game</title>
+    <!-- <link rel="stylesheet" type="text/css" href="assets/css/reset.css"> -->
+
+    <!--Linking CSS-->
+    <link rel="stylesheet"  href="assets/css/style.css">
+    
+     <!-- JQuery -->
+     <script src="https://code.jquery.com/jquery.js"></script>
+
+     <!--Java Script-->
+     <script type= "text/javascript" src="assets/javascript/app.js"></script>
+
+</head>
+
+<body>
+    <div class="container">
+
+       <h1>Totally Trivial Trivia!</h1>    
+      <!--Start game button-->
+        <button class="start">Start</button>
+     <!--in the wrapper all the questions with answers that will display when "start" button clicked. -->  
+        <div class='wrapper'>
+
+                <!-- <h1>Totally Trivial Trivia!</h1>     -->
+                <!--Timer-->
+                <!-- <p> Time Remaining: <span id="display"> </span> Seconds</p> -->
+                <div id="display"> </div>
+                <!--form with the questions and answers-->
+                <div class="form" id="questions-container"></div>  
+        </div> 
+
+    <!--"Done" button to end the game if you finished before time is up-->   
+    <button id="doneBtn">Done</button>
+
+    <!--when time is up message "All Done!" displayed-->
+    <div  id="message"> </div>
+           
+    <!--result of Correct Answers, Incorrest Answers and Unanswered display-->
+    <div class="calculatedResults"> </div>
+
+
+</div>    
+</body>
+</html>
+
+
