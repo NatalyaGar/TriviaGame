@@ -12,7 +12,7 @@ $(document).ready(function() {
     var game = {
         questions:[
         {
-            question: "Who is the president of Uzbekistan?",
+            question: "Who is the president of Uzbekistan(2018)?",
             possibles:["Otamuradov","Umarov","Ketmonov","Karimov","Mirziyoyev"],
             id: "question-one",
             answer: 4
@@ -23,11 +23,16 @@ $(document).ready(function() {
              id: "question-two",
              answer: 0
         },{
-             question: "Who is the president of Russia?",
+             question: "Who is the president of Russia(2018)?",
              possibles:["Medvedev","Putin","Zirinovsky","Hakamada","Orlikov"],
              id: "question-three",
              answer: 1
-        }
+        },{
+            question: "What is the capital of Russia?",
+            possibles:["Saint Petersburg","Moscow","Kiev","Novosibirsk","Samara"],
+            id: "question-two",
+            answer: 1
+        }    
 
 
     ]}
@@ -43,16 +48,14 @@ $(document).ready(function() {
         $(".wrapper").show();
         $("#doneBtn").show();
         console.log("Start!");
-        $(".container").css("height", "600px");
+        $(".container").css("height", "700px");
         
         $(this).hide();
     });
 
-    //"display" timer set 20 Seconds
-    // $("#display").text("20");
 
 //set timer to 20 seconds and run when start button clicked
-    var timer = 20;
+    var timer = 30;
     $("#start").on("click",run.timer);
 
 
@@ -63,8 +66,8 @@ $(document).ready(function() {
         if (timer===0){
             // run stop function
             stop();
-            // $("#message").html("All Done!");
-            checkAnswers();
+            
+            // checkAnswers();
         }
 
     }
@@ -85,6 +88,7 @@ $(document).ready(function() {
     }
 
     run();
+
 //create the inputs for the form
     function formFiling(data){
         var questionString = "<form id='question-one'> " + data.question + "<br>";
@@ -107,12 +111,18 @@ $(document).ready(function() {
         }
         $("#questions-container").append(questionHTML);
     }
-    //function that
-    function isCorrect(question){
-        var answers = $('[name='+question.id +']');
-        var correct = answers.eq(question.answer);
-        var isChecked = correct.is(":checked");
-        return isChecked;
+    //function is correct
+    // function isCorrect(){
+    function isCorrect(whichQuestion){
+        var correctAnswer= game.questions[whichQuestion].possibles[game.questions[whichQuestion].answer];
+        // var answers = $('[name='+question.id +']');
+        // var correct = answers.eq(question.answer);
+        // var isChecked = correct.is(":checked");
+        // var isChecked = whichQuestion.is(":checked");
+        // console.log(isChecked);
+        // return isChecked;
+        console.log(correctAnswer);
+        return correctAnswer;
     }
 
     makeQuestions();
@@ -120,9 +130,13 @@ $(document).ready(function() {
     //display  guessed result
     function guessedResult(question){
         var htmlBlock ="<div>"
-        htmlBlock = htmlBlock + question.question + ': ' + isChecked;
+        // htmlBlock = htmlBlock + question.question + ': ' + isChecked;
+        htmlBlock = htmlBlock + questions.question + ': ' + isChecked;
         return htmlBlock + "</div>";
+        // console.log(this);
+        
     } 
+    
 
     //function to check the answers
     function checkAnswers (){
@@ -133,12 +147,20 @@ $(document).ready(function() {
         var unAnswered = 0;
         // loop through each question and see if it is correct, if it is correct score increments
         for (var i = 0; i <game.questions.length; i++) {
-            if (isCorrect(game.questions[i])) {
+        // for (var i = 0; i < possibles.length; i++) {
+            // if (isCorrect(possibles[i])){
+                // if (isCorrect(game.question[i])) {
+            if (isCorrect(i)) {
+                // if (isCorrect(whichQuestion)) {
                 correct++;
+                console.log(correct);
             } else {
-                //did user click the answer or not, for file incorrect and unanswered scores
-                if (checkAnswered(game.questions[i])){
+                       //did user click the answer or not, for file incorrect and unanswered scores
+                       // if (checkAnswered(game.questions[i])){
+                    if (checkAnswered(game.question[i])){
+                       // if (checkAnswered(possibles[i])){
                     incorrect ++;
+                    // console.log(incorrect);
 
                 } else {
                     unAnswered++;
