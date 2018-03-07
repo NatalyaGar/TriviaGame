@@ -19,33 +19,87 @@
 </head>
 
 <body>
-    <div class="container">
-
-       <h1>Totally Trivial Trivia!</h1>    
-      <!--Start game button-->
-        <button class="start">Start</button>
-     <!--in the wrapper all the questions with answers that will display when "start" button clicked. -->  
-        <div class='wrapper'>
-
-                <!-- <h1>Totally Trivial Trivia!</h1>     -->
-                <!--Timer-->
-                <!-- <p> Time Remaining: <span id="display"> </span> Seconds</p> -->
-                <div id="display"> </div>
-                <!--form with the questions and answers-->
-                <div class="form" id="questions-container"></div>  
-        </div> 
-
-    <!--"Done" button to end the game if you finished before time is up-->   
-    <button id="doneBtn">Done</button>
-
-    <!--when time is up message "All Done!" displayed-->
-    <div  id="message"> </div>
-
-    <!--result of Correct Answers, Incorrest Answers and Unanswered display-->
-    <div class="calculatedResults"> </div>
 
 
-</div>    
+    <!--Start of the game-->
+    <div id = "start_container">
+            <h1 class = "logo" >Totally Trivial Trivia!</h1>  
+
+             <!--Start game button-->
+            <button class="start">Start</button>
+  
+    </div>
+
+    <!-- GamePlay Container -->
+    <div id = "game_container">
+          <h1 class = "logo" >Totally Trivial Trivia!</h1>  
+
+           <!--Timer-->
+           <h1 id = "timer_line">Time Remaining: <span id="timer_number">30 Seconds </span> </h1> 
+           
+           <!--Game Questions-->
+
+           <h1> Who is the president of Uzbekistan(2018)? </h1>
+           <!--Mirziyoyev-->
+                <input type="radio" name="q1" value="Otamuradov">Otamuradov
+                <input type="radio" name="q1" value="Umarov">Umarov
+                <input type="radio" name="q1" value="Ketmonov">Ketmonov
+                <input type="radio" name="q1" value="Karimov">Karimov
+                <input type="radio" name="q1" value="Mirziyoyev">Mirziyoyev
+
+
+           <h2> What is the capital of Uzbekistan? </h2>
+           <!--Tashkent--> 
+                <input type="radio" name="q2" value="Tashkent">Tashkent
+                <input type="radio" name="q2" value="Samarkand">Samarkand
+                <input type="radio" name="q2" value="Khiva">Khiva
+                <input type="radio" name="q2" value="Bukhara">Bukhara
+                <input type="radio" name="q2" value="Andijan">Andijan
+
+           <h2> Who is the president of Russia(2018)? </h2>  
+           <!--Putin-->
+                <input type="radio" name="q3" value="Medvedev">Medvedev
+                <input type="radio" name="q3" value="Putin">Putin
+                <input type="radio" name="q3" value="Zirinovsky">Zirinovsky
+                <input type="radio" name="q3" value="Hakamada">Hakamada
+                <input type="radio" name="q3" value="Orlikov">Orlikov
+
+           <h2> "What is the capital of Russia? </h2> 
+           <!--Moscow--> 
+                <input type="radio" name="q4" value="Saint Petersburg">Saint Petersburg
+                <input type="radio" name="q4" value="Moscow">Moscow
+                <input type="radio" name="q4" value="Kiev">Kiev
+                <input type="radio" name="q4" value="Novosibirsk">Novosibirsk
+                <input type="radio" name="q4" value="Samara">Samara
+
+                <br>
+
+             <!--"Done" button to end the game if you finished before time is up-->   
+            <button id="doneBtn">Done</button>    
+
+    </div>     
+     
+
+
+    <!--End of the game-->
+    <div id = "end_container">
+        <h1 class = "logo" >Totally Trivial Trivia!</h1>     
+
+        <h1 id = "done"> All Done!</h1>
+        <br>
+
+        <h3>Correct Answers: <span id = "correct_answers">0</span></h3>
+		<h3>Incorrect Answers: <span id = "wrong_answers">0</span></h3>
+		<h3>Unanswered: <span id = "unanswered">0</span></h3>
+
+    </div>
+
+
+
+    
+   
+
+   
 </body>
 </html>
 

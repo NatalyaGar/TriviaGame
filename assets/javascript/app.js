@@ -7,202 +7,136 @@
 //5. New screen appear with the text "All Done!"
 //6. and with calculated Correct Answers, Incorrest Answers and Unanswered.
 
+var count = 30;
+var correctCount =0;
+var wrongCount = 0;
+var unansweredCount =0;
+
+
+
 $(document).ready(function() {
+      $("#game_container").hide();
+      $("#end_container").hide();
 
-    var game = {
-        questions:[
-        {
-            question: "Who is the president of Uzbekistan(2018)?",
-            possibles:["Otamuradov","Umarov","Ketmonov","Karimov","Mirziyoyev"],
-            id: "question-one",
-            answer: 4
-            
-        }, {
-             question: "What is the capital of Uzbekistan?",
-             possibles:["Tashkent","Samarkand","Khiva","Bukhara","Andijan"],
-             id: "question-two",
-             answer: 0
-        },{
-             question: "Who is the president of Russia(2018)?",
-             possibles:["Medvedev","Putin","Zirinovsky","Hakamada","Orlikov"],
-             id: "question-three",
-             answer: 1
-        },{
-            question: "What is the capital of Russia?",
-            possibles:["Saint Petersburg","Moscow","Kiev","Novosibirsk","Samara"],
-            id: "question-two",
-            answer: 1
-        }    
+        //start button click
+        $(".start").on("click", function(){
 
-
-    ]}
-
-    
-
-    $(".wrapper").hide();
-    $("#doneBtn").hide();
-    
-//start button click
-    $(".start").on("click", function(){
-//when button clicked questions and answers page appear        
-        $(".wrapper").show();
-        $("#doneBtn").show();
-        console.log("Start!");
-        $(".container").css("height", "700px");
+        //Hide start container 
+            $("#start_container").hide();
         
-        $(this).hide();
-    });
+        //Show game container 
+            $("#game_container").show();
+
+            startCountdown();
+            return;
+
+        });
 
 
-//set timer to 20 seconds and run when start button clicked
-    var timer = 30;
-    $("#start").on("click",run.timer);
+        // Display timer to the user
+        function countdown() {
+            count--;
+            $('#timer_number').html(count + " Seconds");
+
+            //If user finished before time is up, clicks done button
+            $("#doneBtn").on("click",function(){
+                count=0;
+                return;
+            });
 
 
-    function decrement(){
-        timer--;
-        //send timer to html
-        $("#display").html("Time Remaining: " + timer + " Seconds");
-        if (timer===0){
-            // run stop function
-            stop();
-            
-            // checkAnswers();
-        }
+        //Finish the game after the timer reached 0
+            if(count == -1){
+                 
+                //Collect the radio inputs
+                timeUp();
 
-    }
-//make 1 second decrement
-    function run(){
-        counter = setInterval(decrement, 1000);
-    }
+                // Hide game container
+                $("#game_container").hide();
 
-
-    function stop(){
-        clearInterval(counter);
-        $(".wrapper").hide();
-        $("#doneBtn").hide();
-        $(".start").hide();
-        $("#message").html("All Done!");
-        checkAnswers();
-        $(".container").css("height", "400px");
-    }
-
-    run();
-
-//create the inputs for the form
-    function formFiling(data){
-        var questionString = "<form id='question-one'> " + data.question + "<br>";
-        var possibles = data.possibles;
-        for (var i=0; i< possibles.length; i++){
-            var possible = possibles[i];
-            console.log(possible);
-            questionString = questionString + "<input type='radio' name=' "+data.id+ " ' value="+ i +">"+possible;
-            
-        }
-        return questionString +"</form>";
-    }
-    window.formFiling = formFiling;
-
-    //take created inputs for the form and display on the page
-    function makeQuestions() {
-        var questionHTML = ''
-        for(var i = 0; i<game.questions.length; i++){
-            questionHTML = questionHTML + formFiling(game.questions[i]);
-        }
-        $("#questions-container").append(questionHTML);
-    }
-    //function is correct
-    // function isCorrect(){
-    function isCorrect(whichQuestion){
-        var correctAnswer= game.questions[whichQuestion].possibles[game.questions[whichQuestion].answer];
-        // var answers = $('[name='+question.id +']');
-        // var correct = answers.eq(question.answer);
-        // var isChecked = correct.is(":checked");
-        // var isChecked = whichQuestion.is(":checked");
-        // console.log(isChecked);
-        // return isChecked;
-        console.log(correctAnswer);
-        return correctAnswer;
-    }
-
-    makeQuestions();
-
-    //display  guessed result
-    function guessedResult(question){
-        var htmlBlock ="<div>"
-        // htmlBlock = htmlBlock + question.question + ': ' + isChecked;
-        htmlBlock = htmlBlock + questions.question + ': ' + isChecked;
-        return htmlBlock + "</div>";
-        // console.log(this);
-        
-    } 
-    
-
-    //function to check the answers
-    function checkAnswers (){
-        var resultsHTML = '';
-        var guessedAnswers = [];
-        var correct = 0;
-        var incorrect = 0;
-        var unAnswered = 0;
-        // loop through each question and see if it is correct, if it is correct score increments
-        for (var i = 0; i <game.questions.length; i++) {
-        // for (var i = 0; i < possibles.length; i++) {
-            // if (isCorrect(possibles[i])){
-                // if (isCorrect(game.question[i])) {
-            if (isCorrect(i)) {
-                // if (isCorrect(whichQuestion)) {
-                correct++;
-                console.log(correct);
-            } else {
-                       //did user click the answer or not, for file incorrect and unanswered scores
-                       // if (checkAnswered(game.questions[i])){
-                    if (checkAnswered(game.question[i])){
-                       // if (checkAnswered(possibles[i])){
-                    incorrect ++;
-                    // console.log(incorrect);
-
-                } else {
-                    unAnswered++;
-
-                }
-                
             }
+
         }
 
-        //send result to html
-        $('.calculatedResults').html('Correct Answers: ' + correct + "<br>" + 'Incorrect Answers: ' + incorrect +  "<br>" +'Unanswered: ' +unAnswered);
-    }
 
-    //check if each question answered
-    function checkAnswered(question){
-        var anyAnswered = false;
-        var answers = $('[name=' +question.id+']');
-        //check if buttons were checked and sets anyAnswered to true
-        for (var i = 0; i < answers.length; i++) {
-            if (answers[i].checked) {
-                anyAnswered = true;
-            }
-        }
+        // Show the countdown, increment is 1 second
+	function startCountdown(){
 
-        return anyAnswered;
-    }
+		setInterval(countdown, 1000);
 
-    //when Done button is pressed- stop the timer and hide wrapper and done button
+	}
 
-    $("#doneBtn").on('click', function(){
-        stop();
-        checkAnswers();
+    // Function to be run after the timer is up
+	function timeUp(){
+
+
+		// Checked values of Radio Buttons
+		var Q1 = $('input:radio[name="q1"]:checked').val();
+		var Q2 = $('input:radio[name="q2"]:checked').val();
+		var Q3 = $('input:radio[name="q3"]:checked').val();
+        var Q4 = $('input:radio[name="q4"]:checked').val();
         
-    })
-});
+        		// Determine the right/wrong/unanswered counts 
+		if(Q1 == undefined){
+			unansweredCount++;
+		}
+		else if(Q1 == "Mirziyoyev"){
+			correctCount++;
+		}
+		else{
+			wrongCount++;
+        }
+
+
+        
+        if(Q2 == undefined){
+			unansweredCount++;
+		}
+		else if(Q2 == "Tashkent"){
+			correctCount++;
+		}
+		else{
+			wrongCount++;
+		}
+
+
+        if(Q3 == undefined){
+			unansweredCount++;
+		}
+		else if(Q3 == "Putin"){
+			correctCount++;
+		}
+		else{
+			wrongCount++;
+        }
+        
+
+        if(Q4 == undefined){
+			unansweredCount++;
+		}
+		else if(Q4 == "Moscow"){
+			correctCount++;
+		}
+		else{
+			wrongCount++;
+        }
+
+
+        // After answers are validated, display the score results
+		$('#correct_answers').html(correctCount);
+		$('#wrong_answers').html(wrongCount);
+		$('#unanswered').html(unansweredCount);
+
+
+		// Show the completed Score Div
+		$("#end_container").show();
+
+
+    }
+
+});    
 
 
 
 
-
-
-
-
-
-
+   
