@@ -76,7 +76,7 @@ $(document).ready(function() {
 		var Q3 = $('input:radio[name="q3"]:checked').val();
         var Q4 = $('input:radio[name="q4"]:checked').val();
         
-        		// Determine the right/wrong/unanswered counts 
+        // Determine the right/wrong/unanswered counts 
 		if(Q1 == undefined){
 			unansweredCount++;
 		}
@@ -128,7 +128,7 @@ $(document).ready(function() {
 		$('#unanswered').html(unansweredCount);
 
 
-		// Show the completed Score Div
+		// Show the completed Score container
 		$("#end_container").show();
 
 
