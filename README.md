@@ -6,4 +6,4 @@
 
 Please checkout the app at https://natalyagar.github.io/TriviaGame/
 
-<img src="assets/images/triviaGame.png" alt="Progect Picture" width="300" height="200" />
+<img src="assets/images/triviaGame.png" alt="Project Picture" width="300" height="200" />
